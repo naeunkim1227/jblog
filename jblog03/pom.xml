@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.douzone</groupId>
-		<artifactId>mysite</artifactId>
+		<artifactId>jblog</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>jblog03</artifactId>
