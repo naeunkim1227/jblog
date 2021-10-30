@@ -83,4 +83,6 @@
 	<context:annotation-config />
 	
 	<context:component-scan base-package="com.douzone.jblog.controller, com.douzone.jblog.exception" />
+	
+	
 </beans>
