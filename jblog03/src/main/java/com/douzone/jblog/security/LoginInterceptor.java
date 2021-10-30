@@ -25,6 +25,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		UserVo authUser = userService.login(id, password);
 		
+		System.out.println(authUser.getId());
+		System.out.println(authUser.getName());
+		
 		if(authUser == null) {
 			System.out.println("회원 정보 없음");
 			
