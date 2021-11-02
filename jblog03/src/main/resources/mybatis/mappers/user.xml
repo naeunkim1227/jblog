@@ -12,5 +12,12 @@
 			select id,name from user where id=#{id} and password=#{password}
 		]]>
 	</select>
+	
+	
+	<select id="getUserId" parameterType="String" resultType="uservo">
+		<![CDATA[
+			select id from user where id=#{id}
+		]]>
+	</select>
 
 </mapper>
