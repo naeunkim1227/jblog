@@ -23,10 +23,11 @@ public class BlogRepository {
 	}
 
 	public List<PostVo> getpostinfo(String id) {
-		System.out.println("2");
-	
-		
 		return sqlSession.selectList("blog.getpostinfo",id);
+	}
+
+	public List<PostVo> getcateinfo(String id) {
+		return sqlSession.selectList("blog.getcateinfo", id);
 	}
 	
 }

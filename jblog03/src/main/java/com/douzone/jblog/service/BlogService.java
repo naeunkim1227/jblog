@@ -24,5 +24,11 @@ public class BlogService {
 
 	public List<PostVo> getpostinfo(String id) {
 		return blogrepository.getpostinfo(id);
-	}	
+	}
+
+	public List<PostVo> getcateinfo(String id) {
+		return blogrepository.getcateinfo(id);
+	}
+
+	
 }

@@ -21,27 +21,23 @@ import com.douzone.jblog.vo.UserVo;
 
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/blog/{userid}")
 public class BlogController {
 	
 	@Autowired
 	private BlogService blogService;
 	
+	
 	@RequestMapping("")
-	public String view() {
-		return "blog/blog-admin-write";
-	}
-	
-	
-	@RequestMapping("/{userid}")
 	public String main(@PathVariable(value = "userid") Optional<String> userid , Model model) {
 
-		BlogVo blogvo =  blogService.getbloginfo(userid.get());
 		List<PostVo> postlist = blogService.getpostinfo(userid.get());
+		List<PostVo> categorylist = blogService.getcateinfo(userid.get());
+		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("blogvo", blogvo);
 		map.put("postlist", postlist);
+		map.put("categorylist", categorylist);
 		
 		model.addAttribute("map",map);
 		return "blog/blog-main";
@@ -49,9 +45,21 @@ public class BlogController {
 	
 	
 	@Auth(role = "")
-	@RequestMapping("/{userid}/setting")
-	public String test() {
+	@RequestMapping("/setting")
+	public String SettingBasic() {
 		return "blog/blog-admin-basic";
+	}
+	
+	@Auth(role = "")
+	@RequestMapping("/setting/category")
+	public String SettingCate() {
+		return "blog/blog-admin-category";
+	}
+	
+	@Auth(role = "")
+	@RequestMapping("/setting/write")
+	public String SettingWrite() {
+		return "blog/blog-admin-write";
 	}
 	
 

@@ -14,13 +14,16 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${map.blogvo.title}</h1>
-			
+			<h1>${blog.title}</h1>
+
 			<ul>
 				<c:choose>
 					<c:when test="${not empty authUser}">
-						<li><a href="${pageContext.request.contextPath}/user/logoutauth">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/setting">블로그 관리</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/user/logoutauth">로그아웃</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/blog/${authUser.id}/setting">블로그
+								관리</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
@@ -31,18 +34,16 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-					<c:forEach items="${map.postlist }" var="list" begin="0" end="0">
-					<h4>${list.title }</h4>
-					<p>
-					${list.contents }
-					</p>
-					</c:forEach>
+							<c:forEach items="${map.postlist }" var="list" begin="0" end="0">
+								<h4>${list.title }</h4>
+								<p>${list.contents }</p>
+							</c:forEach>
 				</div>
 				<ul class="blog-list">
-				<c:forEach items="${map.postlist}" var="list">
-					<li><a href="">${list.title}</a> <span>${list.reg_date}</span>
-					</li>
-				</c:forEach>
+					<c:forEach items="${map.postlist}" var="list">
+						<li><a href="">${list.title}</a> <span>${list.reg_date}</span>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -57,10 +58,9 @@
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
-				<li><a href="">닥치고 스프링</a></li>
-				<li><a href="">스프링 스터디</a></li>
-				<li><a href="">스프링 프로젝트</a></li>
-				<li><a href="">기타</a></li>
+				<c:forEach items="${map.categorylist }" var="catelist">
+					<li><a href="">${catelist.name }</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 
