@@ -47,9 +47,8 @@ public class SettingAuthInterceptor extends HandlerInterceptorAdapter {
 		
 		//url substring 작업
 		String url = request.getRequestURI();
-		System.out.println(url);
+		System.out.println("ㅜㅜㅜㅜㅜ" +url);
 		url.indexOf("/blog");
-		System.out.println();
 		int startindex = url.indexOf("/blog") + "/blog/".length(); //8
 		int endindex = url.indexOf("/",startindex );
 		String id = url.substring(startindex, endindex);

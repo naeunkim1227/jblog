@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.jblog.repository.BlogRepository;
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
 import com.douzone.jblog.vo.UserVo;
 
@@ -22,13 +23,6 @@ public class BlogService {
 		
 	}
 
-	public List<PostVo> getpostinfo(String id) {
-		return blogrepository.getpostinfo(id);
-	}
-
-	public List<PostVo> getcateinfo(String id) {
-		return blogrepository.getcateinfo(id);
-	}
-
+	
 	
 }

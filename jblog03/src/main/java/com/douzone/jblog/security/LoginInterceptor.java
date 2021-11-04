@@ -25,9 +25,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		UserVo authUser = userService.login(id, password);
 		
-		System.out.println(authUser.getId());
-		System.out.println(authUser.getName());
-		
 		if(authUser == null) {
 			System.out.println("회원 정보 없음");
 			
@@ -37,10 +34,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		
-		
 		HttpSession session =request.getSession(true);
 		session.setAttribute("authUser", authUser);
-		
 		
 		response.sendRedirect(request.getContextPath());
 		

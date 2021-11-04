@@ -17,9 +17,13 @@
 
 	<select id="getcateinfo" parameterType="String" resultType="categoryvo">
 		<![CDATA[
-			select no, name from category where blog_id=#{id};
+			select * from category where blog_id=#{id};
 		]]>
 	</select>
 
-
+	<insert id="write" parameterType="postvo">
+		<![CDATA[
+			insert into post values (null, #{title}, #{contents} , now() , #{category_no})
+		]]>
+	</insert>
 </mapper>

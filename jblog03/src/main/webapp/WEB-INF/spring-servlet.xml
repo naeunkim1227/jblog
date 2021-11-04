@@ -36,6 +36,10 @@
 				</property>
 			</bean>
 		</mvc:message-converters>
+			<mvc:argument-resolvers>
+			<bean
+				class="com.douzone.jblog.security.AuthUserHandlerMethodArgResolver" />
+		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
 	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet 위임(Delegate) Handler -->
@@ -56,7 +60,7 @@
 			<bean class="com.douzone.jblog.interceptor.BlogInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/blog/**/setting/**"/>
+			<mvc:mapping path="/blog/**/admin/**"/>
 			<bean class="com.douzone.jblog.security.SettingAuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

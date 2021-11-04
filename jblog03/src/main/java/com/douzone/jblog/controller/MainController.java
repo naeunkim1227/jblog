@@ -11,7 +11,8 @@ import com.douzone.jblog.vo.UserVo;
 public class MainController {
 
 	@RequestMapping({"","/main"})
-	public String index(@AuthUser UserVo authUser) {
+	public String index() {
+		
 		return "main/index";
 	}
 	

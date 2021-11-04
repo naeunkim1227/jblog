@@ -8,32 +8,41 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.security.AuthUser;
+import com.douzone.jblog.service.AdminService;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
 import com.douzone.jblog.vo.UserVo;
 
 
 @Controller
-@RequestMapping("/blog/{userid}")
+@RequestMapping("/blog")
 public class BlogController {
 	
-	@Autowired
-	private BlogService blogService;
 	
+	@Autowired
+	private AdminService adminService;
 	
 	@RequestMapping("")
-	public String main(@PathVariable(value = "userid") Optional<String> userid , Model model) {
-
-		List<PostVo> postlist = blogService.getpostinfo(userid.get());
-		List<PostVo> categorylist = blogService.getcateinfo(userid.get());
-		
+	public String index() {
+		System.out.println("왜...ㅠ");
+		return "blog/blog-main";
+	}
+	
+	@RequestMapping( "/{userid}")
+	public String main(@AuthUser UserVo authUser, @PathVariable(value = "userid") Optional<String> userid , Model model) {
+		List<PostVo> postlist = adminService.getpostinfo(userid.get());
+		List<CategoryVo> categorylist = adminService.getcateinfo(userid.get());
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("postlist", postlist);
@@ -43,24 +52,6 @@ public class BlogController {
 		return "blog/blog-main";
 	}
 	
-	
-	@Auth(role = "")
-	@RequestMapping("/setting")
-	public String SettingBasic() {
-		return "blog/blog-admin-basic";
-	}
-	
-	@Auth(role = "")
-	@RequestMapping("/setting/category")
-	public String SettingCate() {
-		return "blog/blog-admin-category";
-	}
-	
-	@Auth(role = "")
-	@RequestMapping("/setting/write")
-	public String SettingWrite() {
-		return "blog/blog-admin-write";
-	}
 	
 
 	
