@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="blog">
-	<select id="getbloginfo" parameterType="String" resultType="blogvo">
+<mapper namespace="category">
+	<select id="getcateinfo" parameterType="String" resultType="categoryvo">
 		<![CDATA[
-			select title,logo from blog where id=#{id}
+			select * from category where blog_id=#{id};
 		]]>
 	</select>
-
 </mapper>
