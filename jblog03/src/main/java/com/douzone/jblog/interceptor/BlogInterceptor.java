@@ -40,6 +40,12 @@ public class BlogInterceptor extends HandlerInterceptorAdapter{
 		if(blog == null) {
 			System.out.println("블로그가 널입니다...");
 			blog =  blogService.getbloginfo(authUser.getId());
+			
+			if(blog == null) {
+				blogService.makebloginfo(authUser.getId());
+				blog = blogService.getbloginfo(authUser.getId());
+			}
+			
 			request.getServletContext().setAttribute("blog", blog);
 		}
 		

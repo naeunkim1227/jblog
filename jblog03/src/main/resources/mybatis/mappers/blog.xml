@@ -6,5 +6,10 @@
 			select title,logo from blog where id=#{id}
 		]]>
 	</select>
-
+	
+	<insert id="makebloginfo" parameterType="String">
+		<![CDATA[
+			insert into blog values (#{id} , #{id} , "" )		
+		]]>
+	</insert>
 </mapper>

@@ -10,23 +10,10 @@
 		]]>
 	</select>
 
-	<insert id="write" parameterType="map">
-	
-	<choose>
-		<when test="category_no == -1">
-		<![CDATA[
-			insert into category values (null, '카테고리1', '기본 카테고리 입니다' , #{id} )	
-		]]>
-		<![CDATA[
-			insert into post values (null, #{vo.title}, #{vo.contents} , now() , #{vo.category_no})
-		]]>
-		
-		</when>
-		<otherwise>
+
+	<insert id="write" parameterType="postvo">
 		<![CDATA[
 			insert into post values (null, #{title}, #{contents} , now() , #{category_no})
 		]]>
-		</otherwise>
-	</choose>
 	</insert>
 </mapper>

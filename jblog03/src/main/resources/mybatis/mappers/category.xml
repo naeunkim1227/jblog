@@ -3,7 +3,13 @@
 <mapper namespace="category">
 	<select id="getcateinfo" parameterType="String" resultType="categoryvo">
 		<![CDATA[
-			select * from category where blog_id=#{id};
+			select * from category where blog_id=#{id}
 		]]>
 	</select>
+	
+	<insert id="basicinsert" parameterType="String">
+		<![CDATA[
+			insert into category values (null, '카테고리1', '기본카테고리입니다.' , #{id})		
+		]]>
+	</insert>
 </mapper>

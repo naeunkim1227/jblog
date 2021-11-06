@@ -23,4 +23,8 @@ public class BlogRepository {
 		return sqlSession.selectOne("blog.getbloginfo", id);
 	}
 
+	public void makebloginfo(String id) {
+		sqlSession.insert("blog.makebloginfo", id);
+	}
+
 }

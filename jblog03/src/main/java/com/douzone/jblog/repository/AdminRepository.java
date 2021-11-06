@@ -26,12 +26,17 @@ public class AdminRepository {
 	}
 
 	public void write(PostVo vo, String id) {
+		System.out.println(id);
 
 		if(vo.getCategory_no() == -1) {
+			System.out.println("basicinsert구현중 카테고리 없을경우");
 			sqlSession.insert("category.basicinsert", id);
+			System.out.println("ok");
+			sqlSession.insert("post.write", vo);
+		}else {
+			System.out.println("카테고리 있을 경우");
 			sqlSession.insert("post.write", vo);
 		}
-		sqlSession.insert("post.write", vo);
 		
 	}
 

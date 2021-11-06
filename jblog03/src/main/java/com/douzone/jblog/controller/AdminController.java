@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.xml.ws.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,7 +81,7 @@ public class AdminController {
 		vo.setTitle(title);
 
 		
-		adminService.write(vo, authUser.getId()));
+		adminService.write(vo, authUser.getId());
 		
 		return "redirect:/blog/"+ authUser.getId();
 	}
