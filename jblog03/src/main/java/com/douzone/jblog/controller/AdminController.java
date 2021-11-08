@@ -43,10 +43,9 @@ public class AdminController {
 	public String SettingBasic(@AuthUser UserVo authUser,@RequestParam(value = "title" , required = true, defaultValue = "") String title,
 			@RequestParam(value = "logo-file", defaultValue = "") MultipartFile multipartFile
 			) {
-		System.out.println("1111");
 		adminService.setingbasic(authUser.getId() ,title, multipartFile);
 		
-		return "redirect: /blog/" + authUser.getId();
+		return "blog/blog-main";
 	}
 
 	@Auth(role = "")

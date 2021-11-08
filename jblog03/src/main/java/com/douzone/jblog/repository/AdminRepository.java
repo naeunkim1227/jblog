@@ -32,7 +32,7 @@ public class AdminRepository {
 	}
 
 	public void settingBasic(BlogVo vo) {
-		
+		sqlSession.update("blog.settingBasic",vo);
 	}
 	
 }
