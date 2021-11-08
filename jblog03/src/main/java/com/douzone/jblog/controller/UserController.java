@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.douzone.jblog.security.AuthUser;
+import com.douzone.jblog.service.AdminService;
+import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.UserService;
 import com.douzone.jblog.vo.UserVo;
 
@@ -23,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userservice;
+	
+	@Autowired
+	private BlogService blogService;
 	
 	@RequestMapping(value = "/login" , method = RequestMethod.GET)
 	public String login() {
@@ -51,6 +56,10 @@ public class UserController {
 		}
 		
 		userservice.join(vo);
+		String id = vo.getId();
+		System.out.println(id);
+		blogService.makebloginfo(id);
+		
 		return "redirect:/user/joinsuccess";
 	}
 	

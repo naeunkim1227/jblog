@@ -26,7 +26,7 @@ import com.douzone.jblog.vo.PostVo;
 import com.douzone.jblog.vo.UserVo;
 
 @Controller
-@RequestMapping("/blog/{userid}/admin")
+@RequestMapping("/{userid}/admin")
 public class AdminController {
 	
 	@Autowired
@@ -39,11 +39,11 @@ public class AdminController {
 	}
 	
 	@Auth(role = "")
-	@PostMapping
+	@PostMapping("/basic")
 	public String SettingBasic(@AuthUser UserVo authUser,@RequestParam(value = "title" , required = true, defaultValue = "") String title,
 			@RequestParam(value = "logo-file", defaultValue = "") MultipartFile multipartFile
 			) {
-		
+		System.out.println("1111");
 		adminService.setingbasic(authUser.getId() ,title, multipartFile);
 		
 		return "redirect: /blog/" + authUser.getId();
@@ -71,10 +71,10 @@ public class AdminController {
 	public String SettingWrite(@AuthUser UserVo authUser ,Model model,
 			@RequestParam(value = "title",required = true, defaultValue = "") String title,
 			@RequestParam(value = "content",required = true, defaultValue = "") String content,
-			@RequestParam(value = "category", required = true, defaultValue = "-1") String no 
+			@RequestParam(value = "category", required = true, defaultValue = "1") String no 
 			) {
 		
-		System.out.println("-1일때 로직 구현중 : " + no);
+		System.out.println("cate" + no);
 		PostVo vo = new PostVo();
 		vo.setCategory_no(Long.parseLong(no));
 		vo.setContents(content);

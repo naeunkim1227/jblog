@@ -42,15 +42,15 @@ public class BlogController {
 	public String main(@AuthUser UserVo authUser, @PathVariable(value = "userid") Optional<String> userid , Model model) {
 		List<PostVo> postlist = adminService.getpostinfo(userid.get());
 		List<CategoryVo> categorylist = adminService.getcateinfo(userid.get());
-			
-		System.out.println("====test====");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("postlist", postlist);
 		map.put("categorylist", categorylist);
 		
 		model.addAttribute("map",map);
-		return "blog/blog-main";
+		
+		System.out.println("다시 이동");
+		return "/blog/blog-main";
 	}
 	
 	

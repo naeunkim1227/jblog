@@ -25,6 +25,7 @@ public class BlogService {
 
 	public void makebloginfo(String id) {
 		blogrepository.makebloginfo(id);
+		
 	}
 
 	

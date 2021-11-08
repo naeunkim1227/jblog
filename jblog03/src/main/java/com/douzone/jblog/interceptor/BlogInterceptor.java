@@ -10,7 +10,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.UserVo;
-
 public class BlogInterceptor extends HandlerInterceptorAdapter{
 
 	@Autowired
@@ -22,33 +21,22 @@ public class BlogInterceptor extends HandlerInterceptorAdapter{
 		
 		System.out.println("블로그 인터셉터 실행!");
 		
-		HttpSession session = request.getSession();
-		if(session == null) {
-			response.sendRedirect(request.getContextPath() + "/user/login" );
+		String url = request.getRequestURI();
+		url.indexOf("/blog");
+		System.out.println(	url.indexOf("/blog"));
+		int startindex = url.indexOf("/blog") + "/blog/".length();
+		String id = url.substring(startindex, url.length());
+		System.out.println(id + "의 블로그 정보 가져오기");
+		
+		BlogVo blog =  blogService.getbloginfo(id);
+		
+		if(blog == null ) {
+			System.out.println(id + "의 블로그 없음 / 메인 이동");
+			response.sendRedirect(request.getContextPath());
 			return false;
 		}
-		
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-
-		if(authUser == null) {
-			response.sendRedirect(request.getContextPath() + "/user/login");
-			return false;
-		}
-		
-		BlogVo blog = (BlogVo) request.getServletContext().getAttribute("blog");
-		
-		if(blog == null) {
-			System.out.println("블로그가 널입니다...");
-			blog =  blogService.getbloginfo(authUser.getId());
+		request.getServletContext().setAttribute("blog", blog);
 			
-			if(blog == null) {
-				blogService.makebloginfo(authUser.getId());
-				blog = blogService.getbloginfo(authUser.getId());
-			}
-			
-			request.getServletContext().setAttribute("blog", blog);
-		}
-		
 		return true;
 				
 	}

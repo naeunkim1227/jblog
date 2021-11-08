@@ -60,7 +60,7 @@
 			<bean class="com.douzone.jblog.interceptor.BlogInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/blog/**/admin/**"/>
+			<mvc:mapping path="/**/admin/**"/>
 			<bean class="com.douzone.jblog.security.SettingAuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

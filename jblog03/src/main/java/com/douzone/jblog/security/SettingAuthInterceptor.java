@@ -1,4 +1,4 @@
-package com.douzone.jblog.security;
+	package com.douzone.jblog.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,9 +47,9 @@ public class SettingAuthInterceptor extends HandlerInterceptorAdapter {
 		
 		//url substring 작업
 		String url = request.getRequestURI();
-		System.out.println("ㅜㅜㅜㅜㅜ" +url);
-		url.indexOf("/blog");
-		int startindex = url.indexOf("/blog") + "/blog/".length(); //8
+		url.indexOf("/jblog03");
+		int startindex = url.indexOf("/jblog03") + "/jblog03/".length(); //8
+		System.out.println(startindex);
 		int endindex = url.indexOf("/",startindex );
 		String id = url.substring(startindex, endindex);
 		System.out.println(id);
