@@ -1,5 +1,8 @@
 package com.douzone.jblog.interceptor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,7 +14,6 @@ import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.UserVo;
 public class BlogInterceptor extends HandlerInterceptorAdapter{
-
 	@Autowired
 	private BlogService blogService;
 	
@@ -29,16 +31,16 @@ public class BlogInterceptor extends HandlerInterceptorAdapter{
 		System.out.println(id + "의 블로그 정보 가져오기");
 		
 		BlogVo blog =  blogService.getbloginfo(id);
+
 		
 		if(blog == null ) {
 			System.out.println(id + "의 블로그 없음 / 메인 이동");
 			response.sendRedirect(request.getContextPath());
-			return false;
+			return false; 
 		}
 		request.getServletContext().setAttribute("blog", blog);
 			
 		return true;
-				
 	}
 	
 }

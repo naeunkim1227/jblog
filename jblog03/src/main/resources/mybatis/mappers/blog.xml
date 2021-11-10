@@ -12,4 +12,20 @@
 			insert into blog values (#{id} , #{id} , "" )		
 		]]>
 	</insert>
+	
+	<update id="settingBasic" parameterType="blogvo">
+		<choose>
+			<when test="logo == null">
+				<![CDATA[
+				update blog set title = #{title} where id = #{id}
+				]]>		
+			</when>
+			<otherwise>
+				<![CDATA[
+				update blog set title = #{title}, logo = #{logo} where id = #{id}
+				]]>	
+			</otherwise>
+		</choose>
+	
+	</update>
 </mapper>

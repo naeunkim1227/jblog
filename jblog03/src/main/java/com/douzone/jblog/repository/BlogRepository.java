@@ -27,9 +27,7 @@ public class BlogRepository {
 		
 		System.out.println("makebloginfo" + id);
 		sqlSession.insert("blog.makebloginfo", id);
-		System.out.println("완료");
 		sqlSession.insert("category.basicinsert", id);
-		System.out.println("완료2");
 	}
 
 }

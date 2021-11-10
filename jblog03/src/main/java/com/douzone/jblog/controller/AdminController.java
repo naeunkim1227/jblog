@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.security.AuthUser;
 import com.douzone.jblog.service.AdminService;
+import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
@@ -32,20 +33,30 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private BlogService blogService;
+	
 	@Auth(role = "")
 	@GetMapping({"/basic","" })
-	public String SettingBasic(@AuthUser UserVo authUser) {
+	public String SettingBasic(@AuthUser UserVo authUser, Model model) {
+		BlogVo blog = blogService.getbloginfo(authUser.getId());
+		model.addAttribute("blog", blog);
+		
 		return "blog/blog-admin-basic";
 	}
 	
 	@Auth(role = "")
 	@PostMapping("/basic")
 	public String SettingBasic(@AuthUser UserVo authUser,@RequestParam(value = "title" , required = true, defaultValue = "") String title,
-			@RequestParam(value = "logo-file", defaultValue = "") MultipartFile multipartFile
+			@RequestParam(value = "logo-file") MultipartFile multipartFile
 			) {
-		adminService.setingbasic(authUser.getId() ,title, multipartFile);
 		
-		return "blog/blog-main";
+		
+		adminService.settingbasic(authUser.getId() ,title, multipartFile);
+		
+		
+		
+		return "redirect:/blog/"+authUser.getId();
 	}
 
 	@Auth(role = "")

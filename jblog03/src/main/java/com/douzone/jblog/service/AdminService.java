@@ -35,32 +35,37 @@ public class AdminService {
 		adminrepository.write(vo, id);
 	}
 
-	public void setingbasic(String id, String title, MultipartFile multipartFile) {
-		String SAVA_PATH = "/upload-images";
-		String URL_BASE = "/gallery/images";
+	public void settingbasic(String id, String title, MultipartFile multipartFile) {
+		System.out.println("setting basic 왔음");
+		String SAVA_PATH = "/jblog-images";
+		String URL_BASE = "/jblog/images";
 		
 		File uploaddir = new File(SAVA_PATH);
 		
 		try {
-
-			if(!uploaddir.exists()) {
+			BlogVo vo = new BlogVo();
+			vo.setId(id);
+			vo.setTitle(title);
+			
+			if(!uploaddir.exists()) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 				uploaddir.mkdir();
 			}
 			
+			if(multipartFile.isEmpty()) {
+				vo.setLogo(null);
+			}else {
 			String originName = multipartFile.getOriginalFilename();
 			System.out.println(originName);
 			String extName = originName.substring(originName.lastIndexOf(".")+1);
 			String saveName = generateSaveName(extName);
+
 			byte[] data = multipartFile.getBytes();
-			
 			OutputStream os = new FileOutputStream(SAVA_PATH + "/" + saveName);
 			os.write(data);
 			os.close();
-			
-			BlogVo vo = new BlogVo();
-			vo.setId(id);
 			vo.setLogo(URL_BASE + "/" + saveName);
-			vo.setTitle(title);
+			}
+			
 			
 			adminrepository.settingBasic(vo);
 			
