@@ -96,4 +96,8 @@ public class AdminService {
 		return name;
 	}
 
+	public void addCategory(CategoryVo vo) {
+		adminrepository.addCategory(vo);
+	}
+
 }

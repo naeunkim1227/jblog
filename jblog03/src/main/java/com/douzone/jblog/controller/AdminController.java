@@ -12,11 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.jblog.cotroller.dto.JsonResult;
 import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.security.AuthUser;
 import com.douzone.jblog.service.AdminService;
@@ -50,22 +53,38 @@ public class AdminController {
 	public String SettingBasic(@AuthUser UserVo authUser,@RequestParam(value = "title" , required = true, defaultValue = "") String title,
 			@RequestParam(value = "logo-file") MultipartFile multipartFile
 			) {
-		
-		
 		adminService.settingbasic(authUser.getId() ,title, multipartFile);
-		
-		
 		
 		return "redirect:/blog/"+authUser.getId();
 	}
-
+	
+	//category
 	@Auth(role = "")
 	@RequestMapping(value="/category", method = RequestMethod.GET)
-	public String SettingCate() {
+	public String SettingCate(@PathVariable(value = "userid") String userid,Model model) {
+		
+		List<CategoryVo> catelist = adminService.getcateinfo(userid);
+		model.addAttribute("catelist",catelist);
+		
+		
 		return "blog/blog-admin-category";
 
 	}
 	
+	@ResponseBody
+	@Auth(role = "")
+	@RequestMapping(value="/addCate", method = RequestMethod.POST)
+	public JsonResult AddCate(@RequestBody CategoryVo vo) {
+		
+		System.out.println("ajax1");
+		System.out.println(vo.getBlog_id());
+		adminService.addCategory(vo);
+		
+		return JsonResult.success(vo);
+	}
+	
+	
+	//write
 	@Auth(role = "")
 	@RequestMapping(value="/write", method = RequestMethod.GET)
 	public String SettingWrite(@AuthUser UserVo authUser, @PathVariable(value = "userid") Optional<String> userid,Model model) {

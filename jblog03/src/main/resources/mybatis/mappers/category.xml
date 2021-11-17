@@ -3,13 +3,20 @@
 <mapper namespace="category">
 	<select id="getcateinfo" parameterType="String" resultType="categoryvo">
 		<![CDATA[
-			select * from category where blog_id=#{id}
+			select a.no,a.name,a.desc,b.postcnt from category a  join (select b.blog_id as blog_id,a.category_no as no , count(*) as postcnt from post a join category b on a.category_no = b.no group by a.category_no) b on a.no = b.no 
+			where b.blog_id = #{id}
 		]]>
 	</select>
 	
 	<insert id="basicinsert" parameterType="String">
 		<![CDATA[
 			insert into category values (null, '카테고리1', '기본카테고리입니다.' , #{id})		
+		]]>
+	</insert>
+	
+	<insert id="insert" parameterType="categoryvo">
+		<![CDATA[
+			insert into category values (null, #{name}, #{desc}, #{blog_id})		
 		]]>
 	</insert>
 </mapper>

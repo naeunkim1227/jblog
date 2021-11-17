@@ -34,5 +34,9 @@ public class AdminRepository {
 	public void settingBasic(BlogVo vo) {
 		sqlSession.update("blog.settingBasic",vo);
 	}
+
+	public void addCategory(CategoryVo vo) {
+		sqlSession.insert("category.insert",vo);
+	}
 	
 }
