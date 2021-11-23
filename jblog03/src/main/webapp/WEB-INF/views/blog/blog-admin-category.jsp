@@ -11,6 +11,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script>
 $(function(){
+	
+	console.log($("#name"));
+
+
+	
 	$("#cateAdd").click(function(){
 		
 		var id = $("#userid").val();
@@ -29,7 +34,17 @@ $(function(){
 				contentType: 'application/json',
 				data: JSON.stringify(vo), 
 				success: function(response){
-					console.log(response);
+					if(response.result == "success"){
+						
+					var html = "";
+					html += ("<td>"+ response.data.name	+"</td>");			
+					html += ("<td>"+ response.data.desc	+"</td>");			
+					
+					
+					
+					$("#row").add(html);
+						
+					}
 				}
 				
 				
@@ -65,11 +80,11 @@ $(function(){
 		      			<th>삭제</th>      			
 		      		</tr>
 		      		<c:forEach items="${catelist }" varStatus="st" var="list">
-		      		<tr>
+		      		<tr id="row">
 						<td>${st.index + 1}</td>
-						<td>${list.name}</td>
+						<td id="name">${list.name}</td>
 						<td>${list.postcnt}</td>
-						<td>${list.desc }</td>
+						<td id="desc">${list.desc }</td>
 						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
 					</tr>  
 		      		</c:forEach>
