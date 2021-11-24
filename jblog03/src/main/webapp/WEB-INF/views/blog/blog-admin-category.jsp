@@ -12,22 +12,17 @@
 <script>
 $(function(){
 	
-	console.log($("#name"));
-
-
 	
-	$("#cateAdd").click(function(){
-		
-		var id = $("#userid").val();
-		var name = $("#name").val();
-		var desc = $("#desc").val();
+	$("#btn-add").click(function(){
 		
 		var vo = {
-				blog_id : id,
-				name: name,
-				desc: desc
+				blog_id : $("#userid").val(),
+				name: $("#name").val(),
+				desc: $("#desc").val()
 			}
 			
+		var num = $("#num").val() + 1 ;
+		
 			$.ajax({
 				url: "${pageContext.request.contextPath}/${userid}/admin/addCate",
 				type: 'post',
@@ -35,25 +30,34 @@ $(function(){
 				data: JSON.stringify(vo), 
 				success: function(response){
 					if(response.result == "success"){
-						
+					
+					alert('추가');
+					
 					var html = "";
+					html += ("<tr><td>"+num+"</td>");			
 					html += ("<td>"+ response.data.name	+"</td>");			
+					html += ("<td>"+  0	+"</td>");			
 					html += ("<td>"+ response.data.desc	+"</td>");			
+					html += ("<td><img src='${pageContext.request.contextPath}/assets/images/delete.jpg'></td></tr>");			
 					
-					
-					
-					$("#row").add(html);
+					$(".admin-cat").append(html);
 						
 					}
 				}
 				
 				
 			})
-			
-		
-		
-		
 	});
+	
+	
+	
+	$(".btn-del").click(function(){
+		alert("del");
+		
+	var no	= $(".listNo").val();
+		alert(no);	
+	
+	})
 	
 	});
 </script>
@@ -81,11 +85,11 @@ $(function(){
 		      		</tr>
 		      		<c:forEach items="${catelist }" varStatus="st" var="list">
 		      		<tr id="row">
-						<td>${st.index + 1}</td>
-						<td id="name">${list.name}</td>
+						<td id="num">${st.index + 1}</td>
+						<td>${list.name}</td>
 						<td>${list.postcnt}</td>
-						<td id="desc">${list.desc }</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+						<td>${list.desc }</td>
+						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg" class="btn-del"></td>
 					</tr>  
 		      		</c:forEach>
 				
@@ -106,12 +110,11 @@ $(function(){
 		      		<tr>
 		      			<td class="s">&nbsp;</td>
 		      			<input type="hidden" value= "${ authUser.id }" id="userid"/>
-		      			<td><input type="submit" value="카테고리 추가" id="cateAdd"></td>
+		      			<td><input type="submit" value="카테고리 추가" id="btn-add"></td>
 		      		</tr> 
 		      	</table> 
 			</div>
 		</div>
-		<h1>${pageContext.request.contextPath}/${userid}/admin/addCate</h1>
 		<div id="footer">
 			<p>
 				<strong>Spring 이야기</strong> is powered by JBlog (c)2016

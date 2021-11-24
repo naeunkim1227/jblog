@@ -3,8 +3,9 @@
 <mapper namespace="category">
 	<select id="getcateinfo" parameterType="String" resultType="categoryvo">
 		<![CDATA[
-			select a.no,a.name,a.desc,b.postcnt from category a  join (select b.blog_id as blog_id,a.category_no as no , count(*) as postcnt from post a join category b on a.category_no = b.no group by a.category_no) b on a.no = b.no 
-			where b.blog_id = #{id}
+		select a.no, a.name, a.desc, a.blog_id, count(b.category_no) as postcnt
+		from category a left join post as b ON a.no = b.category_no
+		group by a.no having blog_id= #{id};
 		]]>
 	</select>
 	

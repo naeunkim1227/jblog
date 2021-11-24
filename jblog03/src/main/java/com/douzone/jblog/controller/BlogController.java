@@ -49,7 +49,6 @@ public class BlogController {
 		
 		model.addAttribute("map",map);
 		
-		System.out.println("다시 이동");
 		return "/blog/blog-main";
 	}
 	
