@@ -100,4 +100,8 @@ public class AdminService {
 		adminrepository.addCategory(vo);
 	}
 
+	public void deleteCategory(int no) {
+		adminrepository.deleteCategory(no);
+	}
+
 }

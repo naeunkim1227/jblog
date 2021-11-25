@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,16 +72,30 @@ public class AdminController {
 
 	}
 	
+	
+	//ajax 카테고리 추가
 	@ResponseBody
 	@Auth(role = "")
 	@RequestMapping(value="/addCate", method = RequestMethod.POST)
 	public JsonResult AddCate(@RequestBody CategoryVo vo) {
 		
-		System.out.println("ajax1");
 		System.out.println(vo.getBlog_id());
 		adminService.addCategory(vo);
 		
 		return JsonResult.success(vo);
+	}
+	
+	
+	//ajax 카테고리 삭제
+	@Auth(role ="")
+	@DeleteMapping("/deleteCate")
+	public void DeleteCate(String no) {
+		
+		System.out.println(no + "삭제 할 번호임 ㅇㅇ");
+		
+		int num = Integer.parseInt(no);
+		
+		adminService.deleteCategory(num);
 	}
 	
 	
@@ -95,6 +110,9 @@ public class AdminController {
 		return "blog/blog-admin-write";
 	}
 	
+	
+	
+	// 글 쓰기
 	@Auth(role = "")
 	@RequestMapping(value="/write", method = RequestMethod.POST)
 	public String SettingWrite(@AuthUser UserVo authUser ,Model model,

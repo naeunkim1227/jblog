@@ -38,7 +38,7 @@ $(function(){
 					html += ("<td>"+ response.data.name	+"</td>");			
 					html += ("<td>"+  0	+"</td>");			
 					html += ("<td>"+ response.data.desc	+"</td>");			
-					html += ("<td><img src='${pageContext.request.contextPath}/assets/images/delete.jpg'></td></tr>");			
+					html += ("<td><img src='${pageContext.request.contextPath}/assets/images/delete.jpg' class='btn-del' id='${list.no}'></td></tr>");			
 					
 					$(".admin-cat").append(html);
 						
@@ -51,13 +51,31 @@ $(function(){
 	
 	
 	
-	$(".btn-del").click(function(){
+	$(".btn-del").on("click",function(){
 		alert("del");
 		
-	var no	= $(".listNo").val();
-		alert(no);	
+		var no	= $(this).attr('id');
+		
+		console.log(no);
+		
+		$.ajax({
+			url: "${PageContext.request.contextPath}/${userid}/admin/deleteCate",
+			type: "DELETE",
+			data: {
+				no : no
+			},
+			success: function(response){
+				alert('삭제 완료');
+				
+			}
+			
+		})
+		
 	
-	})
+	});
+	
+	
+	
 	
 	});
 </script>
@@ -89,7 +107,7 @@ $(function(){
 						<td>${list.name}</td>
 						<td>${list.postcnt}</td>
 						<td>${list.desc }</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg" class="btn-del"></td>
+						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg" class="btn-del" id="${list.no}">${list.no}</td>
 					</tr>  
 		      		</c:forEach>
 				

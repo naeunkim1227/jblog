@@ -20,4 +20,12 @@
 			insert into category values (null, #{name}, #{desc}, #{blog_id})		
 		]]>
 	</insert>
+	
+	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from category where no = #{no}
+		]]>
+	
+	</delete>
 </mapper>
