@@ -41,7 +41,7 @@
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${map.postlist}" var="list">
-						<li><a href="">${list.title}</a> <span>${list.reg_date}</span>
+						<li><a href="${pageContext.request.contextPath}/${authUser.id}/${list.category_no}/${list.no}">${list.title}</a> <span>${list.reg_date}</span>
 						</li>
 					</c:forEach>
 				</ul>

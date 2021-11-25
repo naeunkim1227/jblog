@@ -41,6 +41,9 @@ $(function(){
 					html += ("<td><img src='${pageContext.request.contextPath}/assets/images/delete.jpg' class='btn-del' id='${list.no}'></td></tr>");			
 					
 					$(".admin-cat").append(html);
+					$("#name").val('');
+					$("#desc").val('');
+					
 						
 					}
 				}
@@ -51,25 +54,27 @@ $(function(){
 	
 	
 	
-	$(".btn-del").on("click",function(){
-		alert("del");
+	$(".btn-del").click(function(){
 		
 		var no	= $(this).attr('id');
 		
-		console.log(no);
-		
 		$.ajax({
-			url: "${PageContext.request.contextPath}/${userid}/admin/deleteCate",
-			type: "DELETE",
-			data: {
-				no : no
-			},
+			url: "${pageContext.request.contextPath}/${userid}/admin/deleteCate/" + no,
+			type: "delete",
+			data: '',
+			dataType: 'json',
 			success: function(response){
+				console.log(response);
+				/* if(response.result == "success"){
 				alert('삭제 완료');
+				 var te = $(this).parent();
+				
+				 console.log(te);
+				} */
 				
 			}
 			
-		})
+		}) 
 		
 	
 	});

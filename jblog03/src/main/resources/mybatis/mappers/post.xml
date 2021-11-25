@@ -4,7 +4,7 @@
 	
 	<select id="getpostinfo" parameterType="String" resultType="postvo">
 		<![CDATA[
-			select a.title, a.contents, a.reg_date 
+			select a.no,a.title, a.contents, a.reg_date,a.category_no
 			from post a join category b on a.category_no = b.no 
 			where b.blog_id=#{id} order by a.no desc limit 0,5
 		]]>
