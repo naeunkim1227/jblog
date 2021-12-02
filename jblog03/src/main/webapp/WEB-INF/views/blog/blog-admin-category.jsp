@@ -53,31 +53,37 @@ $(function(){
 	});
 	
 	
-	
-	$(".btn-del").click(function(){
+	$(".btn-del").on("click",function(e) {
+		event.preventDefault()
 		
-		var no	= $(this).attr('id');
+		var no = $(this).attr('id');
+
+		t = event.target;
+			
+			var list = document.getElementsByTagName("tbody")[0]
+			
+			if(list.childElementCount == 2){
+				return;
+			}
 		
 		$.ajax({
-			url: "${pageContext.request.contextPath}/${userid}/admin/deleteCate/" + no,
-			type: "delete",
-			data: '',
+			url:"${pageContext.request.contextPath}/${userid}/admin/deletecate",
+			type:'delete',
 			dataType: 'json',
+			data: 'no=' + no  ,
 			success: function(response){
-				console.log(response);
-				/* if(response.result == "success"){
-				alert('삭제 완료');
-				 var te = $(this).parent();
-				
-				 console.log(te);
-				} */
+				if(response.result != "success"){
+					console.error(response.message)
+					return;
+				}
 				
 			}
-			
-		}) 
+				
+		})
+				$('tr[data-no=' +$(t).data("no") + ']').remove()  
 		
-	
-	});
+		
+	})
 	
 	
 	
@@ -118,7 +124,6 @@ $(function(){
 				
 								  
 				</table>
-			
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
 		      	<table id="admin-cat-add">
@@ -141,6 +146,7 @@ $(function(){
 		<div id="footer">
 			<p>
 				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
+				
 			</p>
 		</div>
 	</div>

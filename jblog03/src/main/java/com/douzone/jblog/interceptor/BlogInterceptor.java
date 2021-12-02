@@ -25,10 +25,18 @@ public class BlogInterceptor extends HandlerInterceptorAdapter{
 		
 		String url = request.getRequestURI();
 		url.indexOf("/blog");
-		System.out.println(	url.indexOf("/blog"));
 		int startindex = url.indexOf("/blog") + "/blog/".length();
 		String id = url.substring(startindex, url.length());
+		
 		System.out.println(id + "의 블로그 정보 가져오기");
+		
+		// user/categoryno/boardno 의 경우 parse해주기 
+		if(id.contains("/")) {
+			int num = (id.lastIndexOf("/")-2);
+			System.out.println(num);
+			id = id.substring(0, num);
+			System.out.println("id는?" + id);
+		}
 		
 		BlogVo blog =  blogService.getbloginfo(id);
 

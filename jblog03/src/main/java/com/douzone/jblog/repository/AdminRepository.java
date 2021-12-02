@@ -21,6 +21,10 @@ public class AdminRepository {
 		return sqlSession.selectList("post.getpostinfo",id);
 	}
 
+	public List<PostVo> getpostinfo(PostVo vo) {
+		return sqlSession.selectList("post.getpost",vo);
+	}
+	
 	public List<CategoryVo> getcateinfo(String id) {
 		return sqlSession.selectList("category.getcateinfo", id);
 	}
@@ -43,5 +47,7 @@ public class AdminRepository {
 		
 	sqlSession.delete("category.delete", no);
 	}
+
+	
 	
 }

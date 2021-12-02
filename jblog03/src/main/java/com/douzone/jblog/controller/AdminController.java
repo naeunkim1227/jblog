@@ -88,8 +88,8 @@ public class AdminController {
 	
 	//ajax 카테고리 삭제
 	@Auth(role ="")
-	@DeleteMapping("/deleteCate/{no}")
-	public JsonResult DeleteCate(@PathVariable(value = "no") String no) {
+	@DeleteMapping(value = "/deleteCate")
+	public JsonResult DeleteCate(String no) {
 		System.out.println("왓슴...제발....");
 		int num = Integer.parseInt(no);
 		

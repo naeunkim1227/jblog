@@ -9,6 +9,12 @@
 			where b.blog_id=#{id} order by a.no desc limit 0,5
 		]]>
 	</select>
+	
+	<select id="getpost" parameterType="postvo" resultType="postvo">
+		<![CDATA[
+			select title, contents, reg_date from post where no = #{no} and  category_no = #{category_no };
+		]]>
+	</select>
 
 	<insert id="write" parameterType="postvo">
 		<![CDATA[

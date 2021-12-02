@@ -26,6 +26,10 @@ public class AdminService {
 	public List<PostVo> getpostinfo(String id) {
 		return adminrepository.getpostinfo(id);
 	}
+	
+	public List<PostVo> getpostinfo(PostVo vo) {
+		return adminrepository.getpostinfo(vo);
+	}
 
 	public List<CategoryVo> getcateinfo(String id) {
 		return adminrepository.getcateinfo(id);
@@ -103,5 +107,7 @@ public class AdminService {
 	public void deleteCategory(int no) {
 		adminrepository.deleteCategory(no);
 	}
+
+	
 
 }

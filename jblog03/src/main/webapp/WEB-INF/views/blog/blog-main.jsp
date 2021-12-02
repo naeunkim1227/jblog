@@ -34,14 +34,26 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-							<c:forEach items="${map.postlist }" var="list" begin="0" end="0">
-								<h4>${list.title }</h4>
-								<p>${list.contents }</p>
-							</c:forEach>
+							
+							<c:choose>
+								<c:when test="${not empty map.picpost}">
+									<c:forEach items="${map.picpost}" var="post">
+										<h4>${post.title}</h4>
+										<p>${post.contents}</p>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${map.postlist }" var="list" begin="0" end="0">
+										<h4>${list.title }</h4>
+										<p>${list.contents }</p>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${map.postlist}" var="list">
-						<li><a href="${pageContext.request.contextPath}/${authUser.id}/${list.category_no}/${list.no}">${list.title}</a> <span>${list.reg_date}</span>
+						<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/${list.category_no}/${list.no}">${list.title}</a> <span>${list.reg_date}</span>
 						</li>
 					</c:forEach>
 				</ul>

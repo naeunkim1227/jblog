@@ -52,10 +52,32 @@ public class BlogController {
 		return "/blog/blog-main";
 	}
 	
+	@RequestMapping("{userid}/{list.category_no}/{list.no}")
+	public String showwrite(@PathVariable(value = "userid") Optional<String> userid , 
+			@PathVariable(value = "list.category_no") Long category_no, 
+			@PathVariable(value = "list.no") Long no 
+			,Model model ) {
+		
+		PostVo vo = new PostVo();
+		
+		vo.setNo(no);
+		vo.setCategory_no(category_no);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<PostVo> picpost = adminService.getpostinfo(vo);
+		List<PostVo> postlist = adminService.getpostinfo(userid.get());
+		List<CategoryVo> categorylist = adminService.getcateinfo(userid.get());
+		
+		map.put("picpost", picpost);
+		map.put("postlist", postlist);
+		map.put("categorylist", categorylist);
+		
+		model.addAttribute("map",map);
+		
+		
+		return "/blog/blog-main";
 	
-
-	
-
-	
-	
+	}
 }
